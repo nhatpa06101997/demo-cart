@@ -1,0 +1,35 @@
+<%- include('../layouts/admin_header') -%>
+
+<h3 class="page-title">Add Category</h3>
+<a href="/admin/cates" class="btn btn-primary">Back to all categories</a>
+
+<form action="/admin/cates/add" method="POST" class="form-horizontal">
+    <div class="form-group">
+        <label for="" class="control-label col-xs-2">Title</label>
+        <% if(errors) { %>
+            <p class="p"><%= errors %></p>
+        <% } %>
+        <div class="col-xs-10">
+            <input type="text" name="title" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="" class="control-label col-xs-2">Products</label>
+        <div class="col-xs-10">
+            <% products.forEach(p => { %>
+                <input type="checkbox" id="checks" name="product" value="<%= p.title %>">
+                <label for="" class="control-label col-xs-2"><%= p.title %></label>
+            <% }); %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-xs-10">
+            <button type="submit" >Submit</button>
+        </div>
+    </div>
+</form>
+
+
+<%- include('../layouts/admin_footer') -%>

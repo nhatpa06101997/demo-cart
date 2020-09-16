@@ -1,0 +1,44 @@
+<%- include('../layouts/admin_header') -%>
+
+<h3 class="page-title">Products</h3>
+<a href="/admin/products/add" class="btn btn-primary">Add product</a>
+
+<% if(products.length > 0) { %>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(p => { %>
+                <tr>
+                    <td><%= p.title %></td>
+                    <td><%= parseFloat(p.price).toFixed(2) %></td>
+                    <td><%= p.category %></td>
+                    <td><%= p.desc %></td>
+                    <td>
+                        <% if(p.image == "") { %>
+                            <img height="100" width="100" src="/images/mazzola.jpg" alt="">
+                        <% } else { %>
+                            <!-- <img height="100" width="100" src="/product_images/<%= p._id %>/<%= p.image %>" alt=""> -->
+                            <img height="100" width="100" src="/product_images/<%= p.image %>" alt="">
+                        <% } %>
+                    </td>
+                    <td><a href="/admin/products/edit/<%= p._id %>">Edit</a></td>
+                    <td><a href="/admin/products/delete/<%= p._id %>">Delete</a></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else { %>
+    <h3 class="text-center">Product is empty!!</h3>
+<% } %>
+
+<%- include('../layouts/admin_footer') -%>
